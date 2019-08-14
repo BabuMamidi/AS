@@ -1,0 +1,128 @@
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button> -->
+<mat-toolbar class="header">
+  <div style="width:100%">
+    <img style="height: 63px;float: left;" src="../assets/logo.png" alt="image">
+    <img style="float: right;" src="../assets/smart.PNG" alt="image">
+  </div>
+</mat-toolbar>
+
+<div>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper style="margin-top: 40px">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>DMI</ng-template>
+        <!-- <mat-form-field>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        </mat-form-field> -->
+        <label id="example-radio-group-label">Status</label>
+        <mat-radio-group aria-label="Select an option" class="example-radio-group" formControlName="status">
+          <mat-radio-button class="example-radio-button" value=true>OK</mat-radio-button>
+          <mat-radio-button class="example-radio-button" value=false>NOK</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Evidence" formControlName="evidence">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Leave a comment" formControlName="comment"></textarea>
+        </mat-form-field>
+        <mat-icon _ngcontent-qis-c56="" class="secondary-text s-48 mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true">add_a_photo</mat-icon>
+        <div>
+          <button class="nextButton" matStepperNext>Next &raquo;</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>ATS</ng-template>
+        <!-- <mat-form-field>
+          <input matInput placeholder="Address" formControlName="secondCtrl" required>
+        </mat-form-field> -->
+        <label id="example-radio-group-label">Status</label>
+        <mat-radio-group aria-label="Select an option" class="example-radio-group">
+          <mat-radio-button class="example-radio-button" value="true">OK</mat-radio-button>
+          <mat-radio-button class="example-radio-button" value="false">NOK</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Evidence" formControlName="evidence">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Leave a comment" formControlName="comment"></textarea>
+        </mat-form-field>
+
+        <div>
+          <button class="backButton" matStepperPrevious> &laquo; Back </button>
+          <button class="nextButton" matStepperNext>Next &raquo;</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>ATC</ng-template>
+        <!-- <mat-form-field>
+          <input matInput placeholder="Address" formControlName="secondCtrl" required>
+        </mat-form-field> -->
+        <label id="example-radio-group-label">Status</label>
+        <mat-radio-group aria-label="Select an option" class="example-radio-group">
+          <mat-radio-button class="example-radio-button" value="1">OK</mat-radio-button>
+          <mat-radio-button class="example-radio-button" value="2">NOK</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Evidence" formControlName="evidence">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Leave a comment" formControlName="comment"></textarea>
+        </mat-form-field>
+
+        <div>
+          <button class="backButton" matStepperPrevious> &laquo;Back </button>
+          <button class="nextButton" matStepperNext>Next &raquo;</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step (click)="resetData()">
+      <ng-template matStepLabel><span (click)="resetData()">Summary</span> </ng-template>
+      <div>
+        <button (click)="exportAsXLSX()" class="DownloadButton">
+          <!-- <i class="fa fa-file-excel-o" style="font-size:48px;color:blue"></i> -->
+          Download
+        </button>
+        <table>
+          <tr>
+            <th>S.No.	</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Evidence Type</th>
+            <th>Comments</th>
+            <th>Picture Comments</th>
+            <th>Level</th>
+
+          </tr>
+          <tr *ngFor="let audit of AuditSummaryObj">
+            <td>{{audit.serial}}</td>
+            <td>{{audit.description}}</td>
+            <td>
+              <mat-checkbox [checked]="audit.status" disabled="true"></mat-checkbox>
+            </td>
+            <td>{{audit.evidence}}</td>
+            <td>{{audit.comments}}</td>
+            <td>{{audit.picturecomments}}</td>
+            <td>{{audit.level}}</td>
+          </tr>
+        </table>
+      </div>
+
+
+      <div>
+        <button matStepperPrevious class="backButton">  &laquo; Back </button>
+        <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+
+<mat-toolbar class="footer"> <span>Copyright @ ALSTOM</span></mat-toolbar>
